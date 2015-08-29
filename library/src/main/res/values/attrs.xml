@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SeekBarIndicated">
+        <attr name="seekbar_marginLeft" format="dimension"/>
+        <attr name="seekbar_marginTop" format="dimension"/>
+        <attr name="seekbar_marginRight" format="dimension"/>
+        <attr name="seekbar_marginBottom" format="dimension"/>
+        <attr name="seekbar_indicatorText" format="reference"/>
+    </declare-styleable>
+</resources>
