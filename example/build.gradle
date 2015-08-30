@@ -25,4 +25,3 @@ dependencies {
 
     compile project(':seekbarindicated')
 }
-ssh-keygen -t rsa -C "your_email@example.com"

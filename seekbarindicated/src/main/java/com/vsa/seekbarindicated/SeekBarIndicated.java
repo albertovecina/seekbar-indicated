@@ -68,6 +68,7 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
             setAttributes(context, attrs, defStyle);
         mSeekBar.setOnSeekBarChangeListener(this);
         mTextViewProgress.setText(String.valueOf(mSeekBar.getProgress()));
+
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -75,7 +76,7 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
                         - mSeekBar.getPaddingLeft()
                         - mSeekBar.getPaddingRight();
                 mSeekBar.setPadding(mSeekBar.getPaddingLeft(),
-                        mWrapperIndicator.getHeight(),
+                        mSeekBar.getPaddingTop() + mWrapperIndicator.getHeight(),
                         mSeekBar.getPaddingRight(),
                         mSeekBar.getPaddingBottom());
                 setIndicator();
@@ -152,15 +153,16 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         mIndicatorText = arr.getString(R.styleable.SeekBarIndicated_seekbar_indicatorText);
         arr.recycle();
         mWrapperSeekBarMaxMinValues.setPadding(
-                mSeekBarMarginLeft,
+                mSeekBarMarginLeft + mSeekBar.getPaddingLeft(),
                 0,
-                mSeekBarMarginRight,
+                mSeekBarMarginRight + mSeekBar.getPaddingRight(),
                 0);
 
 
-        mSeekBar.setPadding(mSeekBarMarginLeft,
+        mSeekBar.setPadding(
+                mSeekBar.getPaddingLeft() + mSeekBarMarginLeft,
                 mSeekBar.getPaddingTop() + mSeekBarMarginTop,
-                mSeekBarMarginRight,
+                mSeekBar.getPaddingRight() + mSeekBarMarginRight,
                 mSeekBar.getPaddingBottom() + mSeekBarMarginBottom);
 
     }

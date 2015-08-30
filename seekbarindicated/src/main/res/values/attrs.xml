@@ -6,5 +6,8 @@
         <attr name="seekbar_marginRight" format="dimension"/>
         <attr name="seekbar_marginBottom" format="dimension"/>
         <attr name="seekbar_indicatorText" format="reference"/>
+        <attr name="seekbar_indicatorTextColor" format="reference" />
+        <attr name="seekbar_indicatorSrc" format="reference" />
+        <attr name="seekbar_sideMarks" format="boolean" />
     </declare-styleable>
 </resources>
