@@ -15,6 +15,7 @@
     <com.vsa.seekbarindicated.SeekBarIndicated
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:indicator_textCenterHorizontal="false"
         app:seekbar_marginLeft="10dp"
         app:seekbar_marginRight="10dp" />
     <com.vsa.seekbarindicated.SeekBarIndicated
@@ -23,5 +24,21 @@
         app:seekbar_marginLeft="20dp"
         app:seekbar_marginRight="20dp"
         app:seekbar_marginTop="10dp" />
+
+    <com.vsa.seekbarindicated.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:seekbar_marginLeft="30dp"
+        app:seekbar_marginRight="30dp"
+        app:indicator_textMarginTop="10dp" />
+    <com.vsa.seekbarindicated.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:seekbar_marginLeft="40dp"
+        app:seekbar_marginRight="40dp"
+        app:indicator_textColor="@android:color/black"
+        app:indicator_textCenterHorizontal="true"
+        app:indicator_textCenterVertical="true"
+        app:indicator_src="@android:drawable/ic_menu_compass" />
 
 </LinearLayout>

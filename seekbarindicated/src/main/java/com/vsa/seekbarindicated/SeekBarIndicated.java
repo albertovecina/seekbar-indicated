@@ -2,6 +2,7 @@ package com.vsa.seekbarindicated;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarChangeListener {
 
     private ViewGroup mWrapperIndicator;
+    private ImageView mImageViewIndicator;
     private TextView mTextViewProgress;
     private SeekBar mSeekBar;
     private RelativeLayout mWrapperSeekBarMaxMinValues;
@@ -89,6 +92,7 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
 
     private void bindViews(View view) {
         mWrapperIndicator = (ViewGroup) view.findViewById(R.id.wrapper_seekbar_indicator);
+        mImageViewIndicator = (ImageView) view.findViewById(R.id.img_seekbar_indicator);
         mTextViewProgress = (TextView) view.findViewById(R.id.txt_seekbar_indicated_progress);
         mSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
         mWrapperSeekBarMaxMinValues= (RelativeLayout) view.findViewById(R.id.wrapper_seekbar_max_min_values);
@@ -138,7 +142,7 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
                 * mSeekBar.getProgress()
                 / mSeekBar.getMax();
         mWrapperIndicator.setX(thumbPos
-        - (mWrapperIndicator.getWidth() / 2));
+                - (mWrapperIndicator.getWidth() / 2));
     }
 
     private void setAttributes(Context context, AttributeSet attrs, int defStyle) {
@@ -150,8 +154,7 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         mSeekBarMarginTop = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginTop, 0);
         mSeekBarMarginRight = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginRight, 0);
         mSeekBarMarginBottom = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginBottom, 0);
-        mIndicatorText = arr.getString(R.styleable.SeekBarIndicated_seekbar_indicatorText);
-        arr.recycle();
+        mIndicatorText = arr.getString(R.styleable.SeekBarIndicated_indicator_text);
         mWrapperSeekBarMaxMinValues.setPadding(
                 mSeekBarMarginLeft + mSeekBar.getPaddingLeft(),
                 0,
@@ -164,8 +167,72 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
                 mSeekBar.getPaddingTop() + mSeekBarMarginTop,
                 mSeekBar.getPaddingRight() + mSeekBarMarginRight,
                 mSeekBar.getPaddingBottom() + mSeekBarMarginBottom);
+        setIndicatorImage(arr);
+        setIndicatorTextAttributes(arr);
+        arr.recycle();
 
     }
+
+    private void setIndicatorTextAttributes(TypedArray arr) {
+        RelativeLayout.LayoutParams layoutParams =
+                (RelativeLayout.LayoutParams) mTextViewProgress.getLayoutParams();
+        int indicatorTextMarginLeft =
+                arr.getDimensionPixelSize(
+                        R.styleable.SeekBarIndicated_indicator_textMarginLeft,
+                        layoutParams.leftMargin);
+        int indicatorTextMarginTop =
+                arr.getDimensionPixelSize(
+                        R.styleable.SeekBarIndicated_indicator_textMarginTop,
+                        getContext().getResources()
+                                .getDimensionPixelSize(R.dimen.indicator_txt_margin_top));
+        int indicatorTextMarginRight =
+                arr.getDimensionPixelSize(
+                        R.styleable.SeekBarIndicated_indicator_textMarginRight,
+                        layoutParams.rightMargin);
+        int indicatorTextMarginBottom =
+                arr.getDimensionPixelSize(
+                        R.styleable.SeekBarIndicated_indicator_textMarginBottom,
+                        layoutParams.bottomMargin);
+
+        int indicatorTextColor = arr.getColor(R.styleable.SeekBarIndicated_indicator_textColor, Color.WHITE);
+
+        if(arr.hasValue(R.styleable.SeekBarIndicated_indicator_textCenterHorizontal)) {
+            boolean centerHorizontal = arr.getBoolean(
+                    R.styleable.SeekBarIndicated_indicator_textCenterHorizontal, false);
+            if(centerHorizontal) {
+                layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                if(!arr.hasValue(R.styleable.SeekBarIndicated_indicator_textMarginTop))
+                    indicatorTextMarginTop = 0;
+            }
+        } else {
+            layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+        }
+        if(arr.hasValue(R.styleable.SeekBarIndicated_indicator_textCenterVertical)) {
+            boolean centerVertical = arr.getBoolean(
+                    R.styleable.SeekBarIndicated_indicator_textCenterVertical, false);
+            if(centerVertical)
+                layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+        }
+
+        mTextViewProgress.setTextColor(indicatorTextColor);
+
+        layoutParams.setMargins(indicatorTextMarginLeft,
+                indicatorTextMarginTop,
+                indicatorTextMarginBottom,
+                indicatorTextMarginRight);
+
+
+
+        mTextViewProgress.setLayoutParams(layoutParams);
+    }
+
+    private void setIndicatorImage(TypedArray arr) {
+        int imageResourceId = arr.getResourceId(R.styleable.SeekBarIndicated_indicator_src,
+                R.drawable.indicator_icon);
+        mImageViewIndicator.setImageResource(imageResourceId);
+
+    }
+
 
     public void setOnSeekBarChangeListener(SeekBar.OnSeekBarChangeListener onSeekBarChangeListener) {
         mOnSeekBarChangeListener = onSeekBarChangeListener;
