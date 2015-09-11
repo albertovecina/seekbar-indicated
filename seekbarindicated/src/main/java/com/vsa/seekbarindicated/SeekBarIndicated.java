@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -154,6 +155,28 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         mSeekBarMarginTop = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginTop, 0);
         mSeekBarMarginRight = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginRight, 0);
         mSeekBarMarginBottom = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_seekbar_marginBottom, 0);
+        int seekBarThumbId = arr.getResourceId(R.styleable.SeekBarIndicated_seekbar_thumb, 0);
+        int seekBarProgressDrawableId = arr.getResourceId(R.styleable.SeekBarIndicated_seekbar_progressDrawable, 0);
+        int indicatorPaddingLeft = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_indicator_paddingLeft, 0);
+        int indicatorPaddingTop = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_indicator_paddingTop, 0);
+        int indicatorPaddingRight = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_indicator_paddingRight, 0);
+        int indicatorPaddingBottom = arr.getDimensionPixelSize(R.styleable.SeekBarIndicated_indicator_paddingBottom, 0);
+
+        mWrapperIndicator.setPadding(indicatorPaddingLeft, indicatorPaddingTop, indicatorPaddingRight, indicatorPaddingBottom);
+        if(seekBarThumbId > 0) {
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+                mSeekBar.setThumb(getResources().getDrawable(seekBarThumbId));
+            else
+                mSeekBar.setThumb(getResources().getDrawable(seekBarThumbId, null));
+        }
+
+        if(seekBarProgressDrawableId > 0) {
+            if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP)
+                mSeekBar.setProgressDrawable(getResources().getDrawable(seekBarProgressDrawableId));
+            else
+                mSeekBar.setProgressDrawable(getResources().getDrawable(seekBarProgressDrawableId, null));
+        }
+
         mIndicatorText = arr.getString(R.styleable.SeekBarIndicated_indicator_text);
         mWrapperSeekBarMaxMinValues.setPadding(
                 mSeekBarMarginLeft + mSeekBar.getPaddingLeft(),
