@@ -306,11 +306,11 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         String provideText(int progress);
     }
 
-    private void setFormattedString(TextView textView, String baseText, Object... values) {
+    private void setFormattedString(TextView textView, String baseText, Object value) {
         try {
-            textView.setText(String.format(baseText, values));
+            textView.setText(String.format(baseText, value));
         } catch (Exception e) {
-            textView.setText(String.valueOf(getProgress()));
+            textView.setText(String.valueOf(value));
         }
     }
 }
