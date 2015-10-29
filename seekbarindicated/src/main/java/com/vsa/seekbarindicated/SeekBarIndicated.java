@@ -275,6 +275,11 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         mTextViewMinValue.setText(String.valueOf(min));
     }
 
+    public void setValue(int value){
+        mSeekBar.setProgress(value);
+        mTextViewProgress.setText(String.valueOf(value));
+    }
+
     public void setOnSeekBarChangeListener(SeekBar.OnSeekBarChangeListener onSeekBarChangeListener) {
         mOnSeekBarChangeListener = onSeekBarChangeListener;
     }
