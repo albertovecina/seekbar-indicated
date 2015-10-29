@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -28,7 +27,9 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
     private SeekBar mSeekBar;
     private RelativeLayout mWrapperSeekBarMaxMinValues;
     private TextView mTextViewMinValue;
+    private String mMinValueBaseText;
     private TextView mTextViewMaxValue;
+    private String mMaxValueBaseText;
 
     private int mSeekBarMarginLeft = 0;
     private int mSeekBarMarginTop = 0;
@@ -267,12 +268,25 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
 
     public void setMax(int max) {
         mSeekBar.setMax(max - mSeekBarMin);
-        mTextViewMaxValue.setText(String.valueOf(max));
+        setFormattedString(mTextViewMaxValue, mMaxValueBaseText, max);
     }
 
     public void setMin(int min) {
         mSeekBarMin = min;
-        mTextViewMinValue.setText(String.valueOf(min));
+        setFormattedString(mTextViewMinValue, mMinValueBaseText, min);
+    }
+
+    public void setValue(int value){
+        mSeekBar.setProgress(value);
+        setIndicator();
+    }
+
+    public void setMaxValueBaseText(String mMaxValueBaseText) {
+        this.mMaxValueBaseText = mMaxValueBaseText;
+    }
+
+    public void setMinValueBaseText(String mMinValueBaseText) {
+        this.mMinValueBaseText = mMinValueBaseText;
     }
 
     public void setOnSeekBarChangeListener(SeekBar.OnSeekBarChangeListener onSeekBarChangeListener) {
@@ -292,4 +306,11 @@ public class SeekBarIndicated extends FrameLayout implements SeekBar.OnSeekBarCh
         String provideText(int progress);
     }
 
+    private void setFormattedString(TextView textView, String baseText, Object... values) {
+        try {
+            textView.setText(String.format(baseText, values));
+        } catch (Exception e) {
+            textView.setText(String.valueOf(getProgress()));
+        }
+    }
 }
