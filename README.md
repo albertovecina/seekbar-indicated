@@ -16,4 +16,4 @@ Customize the progress mark margins, text (formatted strings and colors) and dra
 
 ##GRADLE
 
-    compile 'com.vsa:seekbarindicated:1.1'
+    compile 'com.vsa:seekbarindicated:1.2.3'
