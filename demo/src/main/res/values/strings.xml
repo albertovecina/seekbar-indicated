@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">SeekBar Indicated</string>
+    <string name="indicator_km">%1$s Km</string>
+</resources>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <com.vsa.sbi.SeekBarIndicated
+        android:id="@+id/seekBarTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:indicator_formatString="@string/indicator_km"
+        app:indicator_src="@drawable/img_filter_box"
+        app:indicator_textCenterHorizontal="true"
+        app:indicator_textColor="@android:color/black"
+        app:indicator_textMarginTop="8dp"
+        app:seekbar_indicatorDistance="5dp"
+        app:seekbar_maxValue="1000"
+        app:seekbar_minValue="0"
+        app:seekbar_thumb="@drawable/img_filter_slider" />
+
+    <com.vsa.sbi.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:indicator_textCenterHorizontal="false" />
+
+    <com.vsa.sbi.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        app:seekbar_indicatorDistance="10dp" />
+
+    <com.vsa.sbi.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        app:indicator_textMarginTop="10dp"
+        app:seekbar_maxValueFormatString="@string/indicator_km"
+        app:seekbar_minValueFormatString="@string/indicator_km" />
+
+    <com.vsa.sbi.SeekBarIndicated
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        app:indicator_formatString="@string/indicator_km"
+        app:indicator_src="@android:drawable/ic_menu_compass"
+        app:indicator_textCenterHorizontal="true"
+        app:indicator_textCenterVertical="true"
+        app:indicator_textColor="@android:color/black" />
+
+</LinearLayout>
