@@ -1,6 +1,13 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.bintray-release'
+
+ext {
+    versionCode = 4
+    versionName = "1.2.4"
+}
+
 android {
     compileSdkVersion 28
 
@@ -8,8 +15,8 @@ android {
     defaultConfig {
         minSdkVersion 16
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode project.ext.versionCode
+        versionName project.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
@@ -22,6 +29,15 @@ android {
         }
     }
 
+}
+
+publish {
+    userOrg = 'albertovecina'
+    groupId = 'com.vsa'
+    artifactId = 'sbi'
+    publishVersion = project.ext.versionName
+    desc = 'A seekbar with a mark above to show the current progress.'
+    website = 'https://github.com/albertovecina/seekbar-indicated'
 }
 
 dependencies {
