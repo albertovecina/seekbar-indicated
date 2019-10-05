@@ -1,19 +1,27 @@
-##FEATURES
+## FEATURES
 
 Customize the progress mark margins, text (formatted strings and colors) and drawable. 
 
-![EXAMPLE](http://oi60.tinypic.com/2lj4ax0.jpg)
+![EXAMPLE](docs/screenshot.png)
 
-##CODE EXAMPLE
+## CODE EXAMPLE
 
-        <com.vsa.seekbarindicated.SeekBarIndicated
-            android:id="@+id/seekbar_indicated"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:seekbar_marginLeft="10dp"
-            app:seekbar_marginRight="10dp"
-            app:seekbar_indicatorText="@string/formatted_string_resource"/>
+        <com.vsa.sbi.SeekBarIndicated
+                android:id="@+id/seekBarTest"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                app:indicator_formatString="@string/indicator_km"
+                app:indicator_src="@drawable/img_filter_box"
+                app:indicator_textCenterHorizontal="true"
+                app:indicator_textColor="@android:color/black"
+                app:indicator_textMarginTop="8dp"
+                app:seekbar_indicatorDistance="5dp"
+                app:seekbar_maxValue="1000"
+                app:seekbar_minValue="0"
+                app:seekbar_thumb="@drawable/img_filter_slider" />
 
-##GRADLE
+## GRADLE
 
-    compile 'com.vsa:seekbarindicated:1.2.3'
+    compile 'com.vsa:sbi:1.2.4'
